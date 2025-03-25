@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+	<!-- 파일로 저장 -->
+	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>src/main/resources/logs/board_log.log</file>
+		<encoder>
+			<pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] %logger{36} : %msg%n
+			</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>
+				src/main/resources/logs/board_%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+	
 	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>
@@ -11,8 +27,9 @@
 	<logger name="com.study.springboot" level="warn" additivity="false">
 		<appender-ref ref="consoleAppender" />
 	</logger>
-	
+
 	<root level="debug">
-		<appender-ref ref="consoleAppender" />
-	</root>
+       <appender-ref ref="fileAppender"/>
+       <appender-ref ref="consoleAppender" />
+    </root>
 </configuration>
