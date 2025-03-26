@@ -20,26 +20,12 @@
 </head>
 <body>
 	<br><br>
-	<h1 align="center">게 시 판</h1>
-	<p align="right">총 레코드수 : ${ totalRecord }</p>
-	<table class="table">
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>삭제</th>
-		</tr>
-
-		<c:forEach var="b" items="${list}">
-			<tr>
-				<td>${b.boardno}</td>
-				<td><a href="detail?boardno=${b.boardno}">${b.title}</a></td>
-				<td>${b.writer}</td>
-				<td><button type="button" class="btn btn-outline-danger">삭제</button></td>
-			</tr>
-		</c:forEach>
-	</table>
-	<br><br>
-	<a href=""><button type="button" class="btn btn-outline-info">글작성</button></a>
+	<h1 align="center">상세보기</h1><br>
+	작성자 : ${ board.writer }<br><br>
+	제목 : ${ board.title }<br><br>
+	내용 : ${ board.content }<br><br>
+	<hr>
+	
+	<a href="list"><button type="button" class="btn btn-outline-secondary">목록보기</button></a>
 </body>
 </html>

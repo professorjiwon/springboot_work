@@ -21,8 +21,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int totalRecord() {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.totalRecord();
+	}
+	
+	@Override
+	public Board detailBoard(String boardno) {
+		return boardDao.detailBoard(boardno);
 	}
 
 	@Override
@@ -32,9 +36,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int deleteBoard(String boardno) {
+	public int deleteBoard(int boardno) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }
