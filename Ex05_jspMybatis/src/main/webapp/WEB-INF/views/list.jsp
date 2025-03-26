@@ -40,6 +40,6 @@
 		</c:forEach>
 	</table>
 	<br><br>
-	<a href=""><button type="button" class="btn btn-outline-info">글작성</button></a>
+	<a href="writeForm"><button type="button" class="btn btn-outline-info">글작성</button></a>
 </body>
 </html>

@@ -8,10 +8,17 @@
 	</select>
 	
 	<select id="list" resultType="com.study.springboot.domain.Board">
-		select * from boardtest order by boardno desc
+		select * from boardtest 
+		 order by boardno desc
 	</select>
 	
 	<select id="detailBoard" resultType="com.study.springboot.domain.Board">
-		select * from boardtest where boardno = #{boardno}
+		select * from boardtest 
+		  where boardno = #{boardno}
 	</select>
+	
+	<insert id="" parameterType="com.study.springboot.domain.Board">
+		insert into boardtest 
+			values (seq_board.nextval,#{title},#{writer},#{content})
+	</insert>
 </mapper>
