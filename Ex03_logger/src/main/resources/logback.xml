@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <configuration>
-	<!-- 파일로 저장 -->
 	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>src/main/resources/logs/board_log.log</file>
 		<encoder>
