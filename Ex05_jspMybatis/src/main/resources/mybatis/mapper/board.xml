@@ -17,8 +17,12 @@
 		  where boardno = #{boardno}
 	</select>
 	
-	<insert id="" parameterType="com.study.springboot.domain.Board">
+	<insert id="insertBoard" parameterType="com.study.springboot.domain.Board">
 		insert into boardtest 
 			values (seq_board.nextval,#{title},#{writer},#{content})
 	</insert>
+	
+	<delete id="deleteBoard">
+		delete from boardtest where boardno=#{boardno}
+	</delete>
 </mapper>

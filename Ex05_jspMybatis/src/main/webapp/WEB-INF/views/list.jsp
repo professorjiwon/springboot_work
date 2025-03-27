@@ -35,11 +35,11 @@
 				<td>${b.boardno}</td>
 				<td><a href="detail?boardno=${b.boardno}">${b.title}</a></td>
 				<td>${b.writer}</td>
-				<td><button type="button" class="btn btn-outline-danger">삭제</button></td>
+				<td><button type="button" class="btn btn-outline-danger" onclick="location.href='delete?boardno=${b.boardno}'">삭제</button></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<br><br>
-	<a href="writeForm"><button type="button" class="btn btn-outline-info">글작성</button></a>
+	<div align="right"><button type="button" class="btn btn-outline-info" onclick="location.href='writeForm'">글 작 성</button></div>
 </body>
 </html>

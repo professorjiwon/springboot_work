@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.study.springboot.domain.Board;
 import com.study.springboot.service.BoardService;
+import com.study.springboot.service.BoardServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -34,7 +35,7 @@ public class BoardController {
 	   // 2. ModelAndView 객체
 	   // - Model은 데이터를 맵형식<key-value>으로 담고,
 	   // - view는 응답뷰에 대한 정보를 담을 수 있는 공간
-	   //
+
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 		List<Board> list = boardService.list();
@@ -52,7 +53,7 @@ public class BoardController {
 	   	  ex)
 	   	  @GetMapping("/detail")
 	   	  public String detailView(HttpServletRequest request) {
-	   	  	int bno = request.getParameter("boardno");		// 자동형변환
+	   	  	int bno = Integer.parseInt(request.getParameter("boardno"));		
 	   	  }
 	   
 	   2. @RequestParam 어노테이션을 사용하는 방법
@@ -70,7 +71,7 @@ public class BoardController {
 	   	  ex)
 	   	  @GetMapping("/detail")
 	   	  public String detailView(int boardno) {
-	   	  
+	   	  	Board board = boardService.detailBoard(boardno);
 	   	  }
 	   	  
 	   4. @ModelAttribute 어노테이션을 사용하는 방법
@@ -83,7 +84,7 @@ public class BoardController {
 	   	  	String title = b.getTitle();
 	   	  	b.setWriter = "김나중";
 	   	  }
-	      
+
 	   5. 커맨드 객체 방식
 	      : 객체를 받을 때 사용
 	        요청시 전달값의 키값(name값)을 bean 클래스에 담고자하는 필드명으로 작성
@@ -113,10 +114,14 @@ public class BoardController {
 	
 	@PostMapping("/write")
 	public String write(Board b) {
-		System.out.println("title : " + b.getTitle());
-		System.out.println("writer : " + b.getWriter());
-		System.out.println("content : " + b.getContent());
-		
+		boardService.insertBoard(b);
+		return "redirect:list";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(HttpServletRequest request, Model model) {
+		String bno = request.getParameter("boardno");
+		boardService.deleteBoard(bno);
 		return "redirect:list";
 	}
 }
