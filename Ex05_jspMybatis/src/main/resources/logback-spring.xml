@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%thread] %-5level %logger{36} - %msg%n</Pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 일반 log 찍기
+	<logger name="com.study.springboot" level="debug" />
+	
+	<root level="info">
+		<appender-ref ref="console" />
+	</root>
+	 -->
+	
+	<logger name="com.study.springboot" level="debug" /> 
+	
+	<!-- log4jdbc를 사용하기 위한 설정 -->
+	<logger name="jdbc" level="OFF"/> <!-- jdbc드라이버와 관련된 일반적인 로그 메시지 -->
+	<logger name="jdbc.sqlonly" level="OFF"/> <!-- 실행된 SQL 쿼리에 대한 로그 기록 -->
+	<logger name="jdbc.sqltiming" level="DEBUG"/> <!-- SQL쿼리가 실행되는 시간 기록. 성능 분석에 유용 -->
+	<logger name="jdbc.resultset" level="OFF"/>	<!-- SQL실행 결과를 보여줌 -->
+	<logger name="jdbc.resultsettable" level="DEBUG"/>  <!-- SQL실행 결과를 테이블의 형태로 보여줌 -->
+	<logger name="jdbc.connection" level="OFF"/> <!-- DB연결에 대한 정보 -->
+	
+	<root level="OFF">
+		<appender-ref ref="console" />
+	</root>
+</configuration>

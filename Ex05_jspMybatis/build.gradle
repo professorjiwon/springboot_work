@@ -45,6 +45,9 @@ dependencies {
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'org.apache.tomcat.embed:tomcat-embed-el'
+    
+    // log4jdbc 사용하기 위한 설정
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 }
 
 tasks.named('test') {
