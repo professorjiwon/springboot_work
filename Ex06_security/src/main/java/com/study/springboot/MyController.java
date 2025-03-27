@@ -1,6 +1,7 @@
 package com.study.springboot;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,4 +27,16 @@ public class MyController {
 	public String welcome3() {
 		return "admin/welcome3";
 	}
+	
+	@RequestMapping("/loginForm")
+	public String login() {
+		return "security/loginForm";
+	}
+	
+
+	@RequestMapping("/loginError")
+	public String loginError() {
+		return "security/loginError";
+	}
+
 }

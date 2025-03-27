@@ -1,5 +1,6 @@
-package com.study.springboot;
+package com.study.springboot.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,11 +11,15 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import jakarta.servlet.DispatcherType;
 
 @Configuration
 public class WebSecurityConfig {
+	
+	@Autowired
+	AuthenticationFailureHandler authenticationFailureHandler;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,7 +44,20 @@ public class WebSecurityConfig {
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			  );
-		http.formLogin((formLogin -> formLogin.permitAll()));
+		// springboot에서 제공해주는 form
+		// http.formLogin((formLogin) -> formLogin.permitAll());
+		
+		// 내가 만든 form사용하기
+		http.formLogin((formLogin) -> formLogin
+				.loginPage("/loginForm")		// MyController에서 mapping = /loginForm를 찾음
+				.loginProcessingUrl("/login_check")  // action에 넣었던 값
+				//.failureUrl("/loginForm?error")
+				.failureHandler(authenticationFailureHandler)
+				.usernameParameter("username")  // 파라미터 가져올 때 기본값(j_username)
+				.passwordParameter("pwd")		// 파라미터 가져올 때 기본값(j_password)
+				.permitAll()
+		);
+		
 		http.logout((logout) -> logout.permitAll());
 		
 		return http.build();
