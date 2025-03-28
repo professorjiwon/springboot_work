@@ -31,5 +31,10 @@ public class MemberService {
 		return memberRepository.findAll();
 	}
 	
-	deleteById(id)
+	/*
+	 * jpa 메소드
+	삭제시 : deleteById(id)
+	업데이트시 : save(member) 
+	*/
+	
 }
