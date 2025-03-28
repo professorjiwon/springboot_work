@@ -1,13 +1,11 @@
-package exam1;
-
-import java.time.LocalDate;
+package exam2;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
-public class JpaUse1 {
+public class JpaUse2 {
 
 	public static void main(String[] args) {
 		// JPA환경 설정
@@ -18,14 +16,12 @@ public class JpaUse1 {
 		EntityTransaction ts = em.getTransaction();
 		
 		try {
-			ts.begin();   // 트랜잭션 시작
+			ts.begin();
+
+			Member2 user = new Member2("아무개", "1234");
 			
-			Member1 user = new Member1("홍길동", LocalDate.now());
-			
-			// .persist() 영속성으로 객체에 데이터 입력(메모리에 insert해주는 부분)
 			em.persist(user);
 			
-			// db에 create table, insert
 			ts.commit();
 			
 		} catch(Exception e) {
@@ -36,5 +32,4 @@ public class JpaUse1 {
 		}
 		emf.close();
 	}
-
 }

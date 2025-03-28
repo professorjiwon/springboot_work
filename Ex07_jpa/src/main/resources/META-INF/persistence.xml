@@ -5,7 +5,11 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
 	<!-- 영속성 관리 -->
 	<persistence-unit name="JpaEx01" transaction-type="RESOURCE_LOCAL">
-		<class>풀클래스 이름</class>
+		<class>exam3.Member3</class>
+		<!-- 
+		<class>exam1.Member1</class>
+		<class>exam2.Member2</class> 
+		-->
 
 		<!-- true : 위에 <class>풀클래스 이름</class>에 넣은 클래스만 엔티티로 로딩한다. -->
 		<!-- false : classpath에서 자동 탐색 -->
@@ -22,15 +26,15 @@
 				DBMS의 종류가 있고 각 종류마다 쿼리가 조금씩 다르기 때문에
 				이를 알릴 수 있도록 DB의 유형을 지정
 			 -->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect" />
-			
+			<property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect" />
+
 			<!-- 옵션 -->
-			<property name="show_sql" value="true" />
-			<property name="format_sql" value="true" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
 			<!-- <property name="id.new_generator_mappings" value="true" /> -->
 			
 			<!-- insert, select, update, delete -->
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
 			<!-- 
 				create : 애플리케이션이 시작할 때 기존 테이블 삭제하고 새로 생성 
 				create-drop : create비슷하지만, 삭제는 애플리케이션이 종료될때 테이블 삭제
