@@ -66,6 +66,13 @@ public class MemberController {
 		model.addAttribute("members", result);
 		return "selectAll";
 	}
+	
+	/*
+	 * delete후 menu로 가기
+
+	 * update의 반환형은 member
+	 *      update후 update.jsp로 가기
+	 */
 
 }
 
