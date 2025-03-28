@@ -29,8 +29,8 @@
 			<property name="format_sql" value="true" />
 			<!-- <property name="id.new_generator_mappings" value="true" /> -->
 			
-			<!-- insert, select, update, delete, create, create-drop -->
-			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<!-- insert, select, update, delete -->
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<!-- 
 				create : 애플리케이션이 시작할 때 기존 테이블 삭제하고 새로 생성 
 				create-drop : create비슷하지만, 삭제는 애플리케이션이 종료될때 테이블 삭제

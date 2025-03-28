@@ -12,7 +12,7 @@ public class MyController {
 		return "JSP 실행";
 	}
 	
-	@GetMapping("/test1")	// url => localhost:8080/test1
+	@RequestMapping("/test1")	// url => localhost:8080/test1
 	public String t() {  // String => 파일명
 		return "test1";    // 호출할 페이지 : /WEB-INF/views/test1.jsp
 	}
