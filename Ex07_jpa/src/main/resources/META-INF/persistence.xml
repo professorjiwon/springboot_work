@@ -5,10 +5,11 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
 	<!-- 영속성 관리 -->
 	<persistence-unit name="JpaEx01" transaction-type="RESOURCE_LOCAL">
-		<class>exam3.Member3</class>
+		<class>exam4.Member4</class>
 		<!-- 
 		<class>exam1.Member1</class>
-		<class>exam2.Member2</class> 
+		<class>exam2.Member2</class>
+		<class>exam3.Member3</class> 
 		-->
 
 		<!-- true : 위에 <class>풀클래스 이름</class>에 넣은 클래스만 엔티티로 로딩한다. -->

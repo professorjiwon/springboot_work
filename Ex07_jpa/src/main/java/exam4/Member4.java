@@ -1,4 +1,4 @@
-package exam3;
+package exam4;
 
 import java.time.LocalDate;
 
@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="JpaMember3")
-public class Member3 {
+@Table(name="JpaMember4")
+public class Member4 {
 	@Id
 	private String email;
 	
@@ -18,10 +18,10 @@ public class Member3 {
 	@Column(name="create_date")
 	private LocalDate createDate;
 	
-	public Member3() {
+	public Member4() {
 	}
 
-	public Member3(String email, String name, LocalDate createDate) {
+	public Member4(String email, String name, LocalDate createDate) {
 		this.email = email;
 		this.name = name;
 		this.createDate = createDate;
@@ -43,13 +43,8 @@ public class Member3 {
 		this.name = newName;
 	}
 	
-	/*
-	public void setName(String name) {
-		this.name = name;
-	}
-	*/
 	@Override
 	public String toString() {
-		return "Member3 [email=" + email + ", name=" + name + ", createDate=" + createDate + "]";
+		return "Member4 [email=" + email + ", name=" + name + ", createDate=" + createDate + "]";
 	}
 }
