@@ -17,9 +17,9 @@
 	<h1>Member JPA #01</h1>
 	
 	<a href="insert?username=user3">데이터 추가</a><br><br>
-	<a href="">상세 조회</a><br><br>
-	<a href="">전체 조회</a><br><br>
-	<a href="">데이터 삭제</a><br><br>
+	<a href="select?id=1">상세 조회</a><br><br>
+	<a href="selectAll">전체 조회</a><br><br>
+	<a href="delete?id=52">데이터 삭제</a><br><br>
 	<a href="">데이터 수정</a>
 </body>
 </html>

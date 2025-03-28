@@ -1,5 +1,8 @@
 package com.study.springboot.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +23,13 @@ public class MemberService {
 		return result;
 	}
 
+	public Optional<Member> select(Long id) {
+		return memberRepository.findById(id);
+	}
+
+	public List<Member> selectAll() {
+		return memberRepository.findAll();
+	}
+	
+	deleteById(id)
 }
