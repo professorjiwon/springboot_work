@@ -27,5 +27,4 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 	List<Member> findByNameLike(String name2);
 	List<Member> findByNameLikeOrderByNameDesc(String name2);
 	List<Member> findByNameLike(String name2, Sort sort);
-
 }

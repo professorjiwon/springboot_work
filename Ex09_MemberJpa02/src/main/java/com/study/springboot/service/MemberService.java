@@ -62,8 +62,10 @@ public class MemberService {
 
 	public List<Member> selectByNameLikeNameDesc(String name2) {
 		// return memberRepository.findByNameLikeOrderByName(name2); ->오름차순 정렬
+		// return memberRepository.findByNameLikeOrderByNameDescOrderByEmail(name2);
 		return memberRepository.findByNameLikeOrderByNameDesc(name2);
 	}
+
 
 	public List<Member> selectByNameLikeSort(String name2, Sort sort) {
 		return memberRepository.findByNameLike(name2, sort);

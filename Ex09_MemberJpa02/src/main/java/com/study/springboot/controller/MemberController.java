@@ -1,6 +1,5 @@
 package com.study.springboot.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,8 +110,3 @@ public class MemberController {
 		return "selectAll";
 	}
 }
-
-
-
-
-
