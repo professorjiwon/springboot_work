@@ -30,11 +30,13 @@ public class MemberService {
 	public List<Member> selectAll() {
 		return memberRepository.findAll();
 	}
-	
-	/*
-	 * jpa 메소드
-	삭제시 : deleteById(id)
-	업데이트시 : save(member) 
-	*/
+
+	public void delete(Long id) {
+		memberRepository.deleteById(id);	
+	}
+
+	public Member update(Member member) {
+		return memberRepository.save(member);
+	}
 	
 }
