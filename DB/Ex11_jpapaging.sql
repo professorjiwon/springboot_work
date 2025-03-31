@@ -29,3 +29,4 @@ insert into jpapaging values(jpapaging_seq.nextval, 'user21@test.com', 'user21')
 insert into jpapaging values(jpapaging_seq.nextval, 'user22@test.com', 'user22');
 insert into jpapaging values(jpapaging_seq.nextval, 'user23@test.com', 'user23');
 insert into jpapaging values(jpapaging_seq.nextval, 'user24@test.com', 'user24');
+commit;

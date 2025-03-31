@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.study.springboot.domain.Member;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, String>{
+public interface MemberRepository extends JpaRepository<Member, Long>{
 
-	Page<Member> fingByNameLike(String name2, Pageable pageable);
+	Page<Member> findByNameLike(String name2, Pageable pageable);
 }

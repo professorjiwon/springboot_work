@@ -27,12 +27,14 @@ public class MemberController {
 		return "index";
 	}
 	
-	@GetMapping("/selectNameLike")
+	@RequestMapping("/selectNameLike")
 	public String selectNameLike(@RequestParam("name") String name, 
 								 @RequestParam("page") String page,
 								 Model model) 
 	{
 		String name2 = name + "%";
+		int nPage = Integer.parseInt(page) - 1;
+		
 		/*
 		 * Pageable 인터페이스
 		   : Spring에서는 Pagenation을 지원하는 인터페이스 제공
@@ -56,7 +58,7 @@ public class MemberController {
 		     PageRequest(int page, int size, Sort sort)
 		     PageRequest(int page, int size, Sort.Direction direction, String... properties)
 		 */
-		int nPage = Integer.parseInt(page) - 1;
+		
 		
 		/*  페이징 처리 기본
 		PageRequest.ofSize(10)

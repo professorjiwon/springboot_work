@@ -21,7 +21,7 @@ public class Member {
 		allocationSize=1
 	)
 	@GeneratedValue(generator = "pagingseq")
-	private String id;	
+	private Long id;	
 	private String name;
 	private String email;
 }

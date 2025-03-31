@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,13 @@
 	한 페이지당 게시글 수 : ${size}<br><br>
 	현재 페이지 : ${pageNumber}<br><br>
 	현재 페이지의 글 수 : ${numberOfElements}<br><br>
+	
+	<c:forEach var="m" items="${members}">
+		아이디 : ${m.id}<br>
+		이름 : ${m.name}<br>
+		이메일 : ${m.email}
+		<hr>
+	</c:forEach>
 	
 </body>
 </html>

@@ -17,7 +17,7 @@ public class MemberService {
 	MemberRepository memberRepository;
 
 	public Page<Member> selectNameLike(String name2, Pageable pageable) {
-		return memberRepository.fingByNameLike(name2, pageable);
+		return memberRepository.findByNameLike(name2, pageable);
 	}
 
 
