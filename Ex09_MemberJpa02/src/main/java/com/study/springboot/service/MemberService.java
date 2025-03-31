@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.study.springboot.domain.Member;
@@ -49,5 +50,22 @@ public class MemberService {
 
 	public Optional<Member> selectByName(String name) {
 		return memberRepository.findByName(name);
+	}
+
+	public Optional<Member> selectByEmail(String email) {
+		return memberRepository.findByEmail(email);
+	}
+
+	public List<Member> selectByNameLike(String name2) {
+		return memberRepository.findByNameLike(name2);
+	}
+
+	public List<Member> selectByNameLikeNameDesc(String name2) {
+		// return memberRepository.findByNameLikeOrderByName(name2); ->오름차순 정렬
+		return memberRepository.findByNameLikeOrderByNameDesc(name2);
+	}
+
+	public List<Member> selectByNameLikeSort(String name2, Sort sort) {
+		return memberRepository.findByNameLike(name2, sort);
 	}
 }

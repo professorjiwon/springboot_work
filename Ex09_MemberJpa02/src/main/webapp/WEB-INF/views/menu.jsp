@@ -23,6 +23,9 @@
 	
 	<a href=/selectByName?name=홍길동>개별 조회 - ByName</a><br><br>
 	<a href=/selectByEmail?email=test2@test.com>개별 조회 - ByEmail</a><br><br>
+	<a href=/selectByNameLike?name=김>개별 조회 - ByName Like</a><br><br>
+	<a href=/selectByNameLikeNameDesc?name=김>개별 조회 - ByName Like Name Desc</a><br><br>
+	<a href=/selectByNameLikeNameSort?name=김>개별 조회 - ByName Like Name Sort</a><br><br>
 </body>
 </html>
 
