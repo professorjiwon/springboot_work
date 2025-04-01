@@ -16,3 +16,10 @@ a {
 	background-color: rgb(70, 117, 117);
 	cursor: pointer;
 }
+.imgwrap {
+	text-align: center;
+	margin-top: 10%;
+}
+.imgwrap img{
+	width: 400px;
+}
