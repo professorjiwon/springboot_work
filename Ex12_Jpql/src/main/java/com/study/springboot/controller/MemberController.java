@@ -72,6 +72,17 @@ public class MemberController {
 		return "selectNameList2";
 	}
 	
+	@GetMapping("/selectNameLike4")
+	public String selectNameLike4(@RequestParam("name") String search, Model model) {
+		String name = search + "%";
+
+		List<Member> result = memberService.selectNameLike4(name);
+
+		model.addAttribute("members", result);
+		
+		return "selectNameList1";
+	}
+	
 }
 
 

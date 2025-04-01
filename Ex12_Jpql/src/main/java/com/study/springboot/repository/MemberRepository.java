@@ -33,7 +33,8 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 	@Query("select m from jpapaging m where m.name like :search")
 	Page<Member> findMembers(@Param("search") String name, Pageable pageable);
 
-	
-
-	
+	// 일반 sql문
+	@Query(value="select * from jpapaging where name like :name1 order by id desc",
+		   nativeQuery = true)
+	List<Member> findMembersNative(@Param("name1") String name);
 }

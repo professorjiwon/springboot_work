@@ -31,5 +31,9 @@ public class MemberService {
 		return memberRepository.findMembers(name, pageable);
 	}
 
+	public List<Member> selectNameLike4(String name) {
+		return memberRepository.findMembersNative(name);
+	}
+
 
 }
