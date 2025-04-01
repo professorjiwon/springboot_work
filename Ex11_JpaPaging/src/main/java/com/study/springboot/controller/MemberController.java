@@ -27,7 +27,7 @@ public class MemberController {
 		return "index";
 	}
 	
-	@RequestMapping("/selectNameLike")
+	@GetMapping("/selectNameLike")
 	public String selectNameLike(@RequestParam("name") String name, 
 								 @RequestParam("page") String page,
 								 Model model) 
