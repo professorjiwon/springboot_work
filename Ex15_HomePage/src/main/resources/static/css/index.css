@@ -1,0 +1,18 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+.nav-area {
+    width: 100%;
+    background-color: darkslategrey;
+    text-align: center;
+    color: white;
+    height: 45px;
+}
+.nav-area td {
+	width: 25%;
+}
+.nav-area td:hover {
+	background-color: rgb(70, 117, 117);
+	cursor: pointer;
+}
