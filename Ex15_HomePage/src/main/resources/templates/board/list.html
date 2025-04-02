@@ -3,9 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/css/index.css" rel="stylesheet">
 </head>
 <body>
 	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
 	<h2 align="center">게 시 판</h2>
+	
+	<div class="outer">
+		
+		<div th:if="${loginUser != null}" align="right">
+			<a href="insertForm">새글등록</a>
+		</div>
+	</div>
 </body>
 </html>
