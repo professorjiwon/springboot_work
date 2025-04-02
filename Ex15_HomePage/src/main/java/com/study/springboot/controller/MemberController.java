@@ -30,6 +30,11 @@ public class MemberController {
 		return "index";
 	}
 	
+	@RequestMapping("/index")
+	public String index() {
+		return "index";
+	}
+	
 	@GetMapping("/enrollForm")
 	public String enrollForm() {
 		return "member/enrollForm";

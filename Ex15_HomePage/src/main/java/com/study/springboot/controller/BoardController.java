@@ -1,7 +1,5 @@
 package com.study.springboot.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.study.springboot.domain.Board;
 import com.study.springboot.service.BoardService;
+import com.study.springboot.service.ReplyService;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -22,6 +21,9 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	ReplyService replyService;
 	
 	@GetMapping("/list")
 	public String list(@RequestParam(value="nowPage", defaultValue="0") int nowPage, Model model) {
@@ -43,8 +45,8 @@ public class BoardController {
 	
 	@GetMapping("/detailForm")
 	public String detailForm(@RequestParam("bno") Long bno, Model model) {
-		Board board = boardService.detail(bno).get();
-		model.addAttribute("board", board);
+		model.addAttribute("board", boardService.detail(bno).get());
+		model.addAttribute("reply", replyService.seletAll(bno));
 		return "board/detailForm";
 	}
 
