@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.study.springboot.domain.Member;
 import com.study.springboot.service.MemberService;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -62,6 +61,16 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
-
+	/*
+	 * @SessionAttributes + model을 통해 로그인정보를 관리하는 경우
+	    SessionStatus객체를 통해 사용완료 처리를 해야 함.
+	    - session객체를 폐기하지 않고 재사용
+	 */
+	@GetMapping("/logout")
+	public String logout(SessionStatus status) {
+		if(!status.isComplete()) {
+			status.setComplete();
+		}
+		return "redirect:/";
+	}
 }
