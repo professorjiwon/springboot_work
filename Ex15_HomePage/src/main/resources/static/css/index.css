@@ -25,6 +25,5 @@ a {
 }
 .outer {
 	width: 700px;
-	text-align: center;
-	/* margin: 0 auto; */
+	margin: 0 auto;
 }

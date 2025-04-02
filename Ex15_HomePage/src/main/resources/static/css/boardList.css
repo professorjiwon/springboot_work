@@ -1,0 +1,16 @@
+@charset "UTF-8";
+#list-area {
+	width: 100%;
+	border: 1px solid;
+	text-align: center;
+	border-collapse: collapse;
+}
+#list-area th, #list-area td {
+	border: 1px solid;
+}
+
+#ellip {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

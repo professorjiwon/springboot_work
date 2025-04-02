@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/css/index.css" rel="stylesheet">
+<link href="/css/boardList.css" rel="stylesheet">
 </head>
 <body>
 	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
@@ -11,20 +12,20 @@
 	
 	<div class="outer">
 		<div th:text="|총 게시글 수 : ${boardPage.totalElements}|"></div>
-		<table>
+		<table id="list-area" align="center">
 			<thead>
 				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>조회수</th>
-					<th>작성일</th>
+					<th width="10%">글번호</th>
+					<th width="47%">제목</th>
+					<th width="15%">작성자</th>
+					<th width="10%">조회수</th>
+					<th width="15%">작성일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="board, state: ${boardPage}">
 					<td>[[${board.bno}]]</td>
-					<td><a th:href="@{detailForm(bno=${board.bno})}">[[${board.title}]]</a></td>
+					<td id="ellip"><a th:href="@{detailForm(bno=${board.bno})}">[[${board.title}]]</a></td>
 					<td>[[${board.writer}]]</td>
 					<td>[[${board.count}]]</td>
 					<td th:text="*{#temporals.format(board.createDate, 'yyyy-MM-dd')}"></td>

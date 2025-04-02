@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/css/index.css" rel="stylesheet">
+</head>
+<body>
+	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
+	<h2 align="center">상세보기</h2>
+	
+	<div>
+		<table>
+			<tr>
+				<td>제목</td>
+				<td>[[${board.title}]]</td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td>[[${board.writer}]]</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea rows="10" cols="50">[[${board.content}]]</textarea></td>
+			</tr>
+			<tr>
+				<td>작성일</td>
+				<td th:text="*{#temporals.format(board.createDate, 'yyyy-MM-dd')}"></td>
+			</tr>
+			<tr>
+				<td>조회수</td>
+				<td>[[${board.count}]]</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

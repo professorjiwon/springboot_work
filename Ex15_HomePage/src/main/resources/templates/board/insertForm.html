@@ -4,12 +4,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/css/index.css" rel="stylesheet">
+<style>
+	.write {
+		margin: 0 auto;
+		width: 100%;
+	}
+</style>
 </head>
 <body>
 	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
 	<h2 align="center">글 쓰 기</h2>
 	
-	<div class="outer">
+	<div class="write">
 		<form method="post" action="insert">
 			<table>
 				<tr>

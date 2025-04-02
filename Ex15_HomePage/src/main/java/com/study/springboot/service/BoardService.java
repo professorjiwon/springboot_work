@@ -1,5 +1,7 @@
 package com.study.springboot.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,14 @@ public class BoardService {
 
 	public void insert(Board board) {
 		boardRepository.save(board);
+	}
+
+	public Optional<Board> detail(Long bno) {
+		return boardRepository.findById(bno)
+							  .map(board -> {
+								  board.setCount(board.getCount() + 1);
+								  return boardRepository.save(board);
+							  });	
 	}
 
 }

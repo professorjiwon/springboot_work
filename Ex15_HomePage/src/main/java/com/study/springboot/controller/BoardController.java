@@ -40,5 +40,12 @@ public class BoardController {
 		boardService.insert(board);
 		return "redirect:list";
 	}
+	
+	@GetMapping("/detailForm")
+	public String detailForm(@RequestParam("bno") Long bno, Model model) {
+		Board board = boardService.detail(bno).get();
+		model.addAttribute("board", board);
+		return "board/detailForm";
+	}
 
 }
