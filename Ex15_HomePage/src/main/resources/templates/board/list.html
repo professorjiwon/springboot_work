@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -10,7 +10,38 @@
 	<h2 align="center">게 시 판</h2>
 	
 	<div class="outer">
+		<div th:text="|총 게시글 수 : ${boardPage.totalElements}|"></div>
+		<table>
+			<thead>
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>조회수</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="board, state: ${boardPage}">
+					<td>[[${board.bno}]]</td>
+					<td><a th:href="@{detailForm(bno=${board.bno})}">[[${board.title}]]</a></td>
+					<td>[[${board.writer}]]</td>
+					<td>[[${board.count}]]</td>
+					<td th:text="*{#temporals.format(board.createDate, 'yyyy-MM-dd')}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 페이지 처리 -->
+		<div align="center">
+			<a th:if="${boardPage.number > 0}" th:href="@{list(nowPage=${boardPage.number-1})}">Prev...</a>
+			<span th:each="pageNumber : ${#numbers.sequence(boardPage.number, boardPage.totalPages-1)}">
+        		<strong th:if="${pageNumber == boardPage.number}" th:text="|[${pageNumber+1}]|"></strong>
+        		<a th:unless="${pageNumber == boardPage.number}" th:href="@{list(nowPage=${pageNumber})}" th:text="|[${pageNumber+1}]|"></a>
+        	</span>
+        	<a th:if="${boardPage.number < boardPage.totalPages-1}" th:href="@{list(nowPage=${boardPage.number+1})}">...Next</a>
+		</div>
 		
+		<!-- 글쓰기 -->
 		<div th:if="${loginUser != null}" align="right">
 			<a href="insertForm">새글등록</a>
 		</div>
