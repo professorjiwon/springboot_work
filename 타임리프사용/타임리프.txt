@@ -1,0 +1,12 @@
+<div th:text="|총게시글 수 : ${boardPage.totalElements}"></div>
+<div th:text="총게시글 수 : " + "${boardPage.totalElements}"></div>
+<div>[[총게시글 수 : ${boardPage.totalElements}]]</div>
+
+test변수에 저장이 아래와 같다면
+test = <b>총게시글 수<b>   
+<div>[${test}]</div>  -> 굵은 글씨로 : 총게시글 수
+<div>[[${test}]]</div> -> 모두 글자로 : <b>총게시글수</b>
+
+
+현재페이지 : boardPage.number
+총page수 : boardPage.totalPages
