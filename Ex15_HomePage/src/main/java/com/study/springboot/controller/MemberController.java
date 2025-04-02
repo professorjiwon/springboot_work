@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.study.springboot.domain.Member;
 import com.study.springboot.service.MemberService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @SessionAttributes("loginUser")
 public class MemberController {
@@ -35,27 +37,31 @@ public class MemberController {
 	}
 	
 	@GetMapping("/idCheck")
-	public @ResponseBody boolean idCheck(@RequestParam("id") String id) {
+	@ResponseBody
+	public boolean idCheck(@RequestParam("id") String id) {
 		return memberService.idCheck(id);
 	}
 	
 	@PostMapping("/memberInsert")
-	public String insert(Member member, Model model) {
+	public String insert(Member member) {
 		String enPass = pEncoder.encode(member.getPassword());
 		member.setPassword(enPass);
-		Member m = memberService.insert(member);
-		
-		model.addAttribute("loginUser",m);
+		memberService.insert(member);
 		return "redirect:/";
 	}
 	
-	/*
-	 * 로그인 시
-	   password
-	   
-	   pEncode.matches(사용자가넣은 패스워드, DB에서 가져온 패스워드)
-	   
-	 */
+	@PostMapping("/login")
+	public String login(Member member, Model model) {
+		Member loginUser = memberService.login(member);
+		
+		if(loginUser != null && pEncoder.matches(member.getPassword(), loginUser.getPassword())) {
+			model.addAttribute("loginUser", loginUser);  
+			// request scope -> session scope로 변환
+			//   class에 추가 어노테이션 추가(@SessionAttributes({"loginUser","여러개"}))
+		}
+		return "redirect:/";
+	}
+	
 	
 
 }
