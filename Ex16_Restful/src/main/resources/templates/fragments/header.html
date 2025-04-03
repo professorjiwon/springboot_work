@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/css/index.css" rel="stylesheet">
+</head>
+<body>
+	<div th:fragment="fragment-menu">
+		<h1 align="center">StrpingBoot JPA HomePage</h1>
+		<!-- 로그인 전 -->
+		<div th:if="${loginUser == null}" align="right">
+			<form action="login" method="post">
+				<table>
+					<tr>
+						<td>아이디</td>
+						<td><input name="id" required></td>
+						<td rowspan="2"><input type="submit" value="로그인" style="height: 50px;"></td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="password" name="password" required></td>
+					</tr>
+					<tr>
+						<td colspan="3" align="center">
+							<a href="enrollForm">회원가입</a>&emsp;
+							<a href="">아이디/비번찾기</a>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<!-- 로그인 후 -->
+		<div th:if="${loginUser != null}" align="right">
+			<table>
+				<tr>
+					<td colspan="2">
+                         <h3>[[${loginUser.name}]]님 환영합니다.</h3>
+					</td>
+				</tr>
+                <tr>
+                    <td><a href="">마이페이지</a></td>
+                    <td><a href="logout">로그아웃</a></td>
+                </tr>
+			</table>
+		</div>
+
+        <br>
+
+        <table class="nav-area" align="center">
+            <tr>
+                <td onclick="location.href='index'">Home</td>
+                <td onclick="location.href='menuForm'">MENU</td>
+                <td onclick="location.href='list'">게시판</td>
+                <td>찾아오는길</td>
+            </tr>
+        </table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/webjars/jquery/3.7.1/jquery.min.js"></script>
+
+<link href="/css/index.css" rel="stylesheet">
+<link href="/css/detail.css" rel="stylesheet">
+</head>
+<body>
+	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
+	<h2 align="center">상세보기</h2>
+	
+	<div class="outer">
+		<table class="detailTable">
+			<tr>
+				<td>제목</td>
+				<td>[[${board.title}]]</td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td>[[${board.writer}]]</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea rows="10" cols="50">[[${board.content}]]</textarea></td>
+			</tr>
+			<tr>
+				<td>작성일</td>
+				<td th:text="*{#temporals.format(board.createDate, 'yyyy-MM-dd')}"></td>
+			</tr>
+			<tr>
+				<td>조회수</td>
+				<td>[[${board.count}]]</td>
+			</tr>
+		</table>
+		
+		<!-- 댓글 -->
+		<table class="detailTable">
+			<thead>
+				<tr>
+					<th>댓글작성</th>
+					<span th:if="${loginUser != null}">
+						<th><textarea cols="40" rows="3" id="replyContent"></textarea></th>
+						<th><input type="button" id="insertReply" value="댓글등록"></th>
+					</span>
+					<th th:unless="${loginUser != null}" colspan="2">로그인 후 댓글을 작성할 수 있습니다.</th>
+				</tr>
+				<tr>
+					<th width="15%">작성자</th>
+					<th width="67%">내용</th>
+					<th width="18%">작성일</th>
+				</tr>
+			</thead>
+			<tbody id="replylist">
+				<tr th:each="r : ${reply}">
+					<td>[[${r.writer}]]</td>
+					<td>[[${r.content}]]</td>
+					<td th:text="*{#temporals.format(r.createDate, 'yyyy-MM-dd')}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script>
+		$(() => {
+			$('#insertReply').on('click', function() {
+				$.ajax({
+					url : "rInsert",
+					type : "post",
+					data : {
+						refBno : "[[${board.bno}]]",
+						content : $('#replyContent').val(),
+						writer : "[[${loginUser != null ? loginUser.id : ''}]]"
+					},
+					success : function(result) {
+						console.log(result);
+						let list = "";
+						$.each(result, function(index, value) {
+							list += '<tr>'
+								 + '	<td>'+ value.writer +'</td>'
+								 + '	<td>'+ value.content +'</td>'
+								 + '	<td>'+ value.createDate.substring(0,10) +'</td>'
+								 + '</tr>'
+						});
+						$('#replylist').html(list);
+						$('#replyContent').val("");
+					},
+					error : function() {
+						console.log('댓글 등록 실패');
+					}
+				})
+			});
+		})
+	</script>
+</body>
+</html>

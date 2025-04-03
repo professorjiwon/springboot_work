@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/* Outer container for center alignment */
+.outer {
+    width: 700px;
+    margin: 0 auto;
+}
+
+/* Table Styling */
+.detailTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.detailTable td, .detailTable th {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.detailTable th {
+    background-color: #f4f4f4;
+}
+
+.detailTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.detailTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Textarea styling */
+textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+/* Comment Section Styling */
+#replylist {
+    margin-top: 20px;
+}
+
+#replylist tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#replylist td {
+    padding: 8px;
+}
+
+
+#insertReply {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#insertReply:hover {
+    background-color: #45a049;
+}
+
+/* Login notice for comments */
+th[colspan="2"] {
+    color: #f44336;
+    text-align: center;
+}
