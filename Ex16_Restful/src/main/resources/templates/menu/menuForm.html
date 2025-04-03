@@ -72,13 +72,57 @@
 						url : `/menu/type/${e.target.value}`,
 						method : 'GET',
 						success(result) {
-							consol.log(result);
+							console.log(result);
+							menuTable('#menuType-result', result);
 						},
 						error:console.log
 					})
 				})
 			})
 		</script>
+		
+		<!-- 3. GET   /menu/type/KR/taste/MILD  2가지를 만족하는 필드 -->
+		<div class="menu-test">
+			<h3>메뉴 타입과 맛별 조회(GET)</h3>
+			<form name="menuTypeTasteFrm" id="menuTypeTasteFrm">
+				<div class="menuRadio">
+					<input type="radio" name="type" value="KR">한식&emsp;
+					<input type="radio" name="type" value="CH">중식&emsp;
+					<input type="radio" name="type" value="JP">일식&emsp;
+				</div>
+				&emsp;&emsp;|&emsp;&emsp;
+				<div class="menuRadio">
+					<input type="radio" name="taste" value="MILD">순한맛&emsp;
+					<input type="radio" name="taste" value="HOT">매운맛&emsp;
+				</div>
+				<br><br>
+				<button class="btn">조 회</button>
+			</form>
+		</div>
+		<br>
+		<div id="menuTypeTaste-result"></div>
+		<hr>
+		<script>
+			$(() => {
+				$('#menuTypeTasteFrm').on('submit', e => {
+					e.preventDefault();
+					const type = e.target.type.value;
+					const taste = e.target.taste.value;
+					$.ajax({
+						url : `/menu/type/${type}/taste/${taste}`,
+						method : 'GET',
+						success(result) {
+							console.log(result);
+							menuTable('#menuTypeTaste-result', result);
+						},
+						error: console.log
+					});
+				});
+			})
+		</script>
+		
+		<!-- 4. GET		/menu/10 : id가 10번인 메뉴1건만 조회-->
+		
 		
 		<script>
 			const menuTable = (selector, data) => {
