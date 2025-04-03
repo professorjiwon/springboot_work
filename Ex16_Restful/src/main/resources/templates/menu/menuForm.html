@@ -147,8 +147,160 @@
 			})
 		</script>
 		
+		<!-- 5. POST	/menu : 메뉴한건 등록 -->
+		<div class="menu-test">
+			<h3>메뉴 등록(POST)</h3>
+			<form name="menuEnrollFrm" id="menuEnrollFrm">
+				음식점 : <input name="restaurant" required><br><br>
+				메뉴 : <input name="name" required><br><br>
+				가격 : <input type="number" name="price" required><br><br>
+				<div class="menuRadio">
+					<input type="radio" name="type" value="KR">한식&emsp;
+					<input type="radio" name="type" value="CH">중식&emsp;
+					<input type="radio" name="type" value="JP">일식&emsp;
+				</div>
+				<br><br>
+				<div class="menuRadio">
+					<input type="radio" name="taste" value="MILD">순한맛&emsp;
+					<input type="radio" name="taste" value="HOT">매운맛&emsp;
+				</div>
+				<br><br>
+				<button class="btn">등 록</button>
+			</form>
+		</div>
+		<hr>
+
+		<script>
+			$(() => {
+				$('#menuEnrollFrm').on('submit', e => {
+					e.preventDefault();
+					const menu = {
+						restaurant : e.target.restaurant.value,
+						name : e.target.name.value,
+						price : e.target.price.value,
+						type : e.target.type.value,
+						taste : e.target.taste.value
+					};
+
+					$.ajax({
+						url : `/menu`,
+						data : JSON.stringify(menu),
+						method : 'POST',
+						contentType : 'application/json',
+						success(result, textStatus, jqXHR) {
+							console.log("result : " + result);
+							console.log("상태 : " + textStatus);
+							const location = jqXHR.getResponseHeader('Location');
+							console.log(location);  // /menu/30
+							
+							console.log('id : ', location.split('/').pop());
+							/*
+								- pop() : 배열의 맨 끝부터 차례대로 뽑은값 반환
+								- shift() : 배열의 맨 앞부터 차례대로 뽑은값 반환
+								- push(값) : 배열의 맨 끝에 삽입
+								- unshift(값) : 배열의 맨 앞에 삽입
+							*/
+							if(jqXHR.status === 201) {
+								alert("메뉴가 등록 되었습니다.");
+							}
+						},
+						error : console.log,
+						complete() {
+							e.target.reset();
+						}
+					})
+				})
+			})
+		</script>
+		-->
+		<!-- 6. PUT	 /menu : 메뉴 한건 전체수정 -->
+		<div class="menu-test">
+			<h3>메뉴 수정하기(PUT)</h3>
+			<p>메뉴 검색 후 수정</p>
+			<form name="menuSearchFrm" id="menuSearchFrm">
+				메뉴번호 : <input name="id"><br><br>
+				<button class="btn">검 색</button>
+			</form>
+			<br>
+			<form name="menuUpdateFrm" id="menuUpdateFrm">
+				음식점 : <input name="restaurant" required><br><br>
+				메뉴 : <input name="name" required><br><br>
+				가격 : <input type="number" name="price" required><br><br>
+				<div class="menuRadio">
+					<input type="radio" name="type" value="KR">한식&emsp;
+					<input type="radio" name="type" value="CH">중식&emsp;
+					<input type="radio" name="type" value="JP">일식&emsp;
+				</div>
+				<br><br>
+				<div class="menuRadio">
+					<input type="radio" name="taste" value="MILD">순한맛&emsp;
+					<input type="radio" name="taste" value="HOT">매운맛&emsp;
+				</div>
+				<br><br>
+				<button class="btn">등 록</button>
+				<input type="hidden" name="id">
+			</form>
+			
+		</div>
 		
 		<script>
+			$(() => {
+				$('#menuSearchFrm').on('submit', e => {
+					e.preventDefault();
+					findById(e.target.id.value);
+				});
+				
+				$('#menuUpdateFrm').on('submit', e => {
+					e.preventDefault();
+					const frmData = new FormData(e.target);
+					const menu = {};
+					frmData.forEach((value, key) => {
+						menu[key] = value;
+					});
+				
+					$.ajax({
+						url : `/menu`,
+						method : 'PUT',
+						data : JSON.stringify(menu),
+						contentType : 'application/json',
+						success(result) {
+							console.log(result);
+							if(result != null) {
+								alert('수정 되었습니다');
+							}
+						},
+						error:console.log
+					})
+				});
+			})
+		</script>
+		
+		
+		<script>
+			const findById = id => {
+				$.ajax({
+					url : `/menu/${id}`,
+					method : 'GET',
+					success(result) {
+						console.log(result);
+						const frm = document.menuUpdateFrm;
+						// 객체구조분해할당
+						const {id, restaurant, name, price, type, taste} = result;
+						frm.id.value = id;
+						frm.restaurant.value = restaurant;
+						frm.name.value = name;
+						frm.price.value = price;
+						frm.type.value = type;
+						frm.taste.value = taste;
+					},
+					error(jqXHR/*, textStatus, errorMsg*/) {
+						if(jqXHR.status == 404) {
+							alert("조회한 메뉴는 존재하지 않습니다.");
+						}
+					}
+				});
+			}
+			
 			const menuTable = (selector, data) => {
 				const container = document.querySelector(selector);
 				let value = `<table align="center" id="list-area">
@@ -176,6 +328,8 @@
 				value += `</tbody></table>`;
 				container.innerHTML = value;
 			}
+			
+			
 		</script>
 	</div>
 </body>

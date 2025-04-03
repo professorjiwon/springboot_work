@@ -1,5 +1,6 @@
 package com.study.springboot.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -80,14 +84,30 @@ public class MenuRestController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Menu> findById(@PathVariable(name="id") Long id) {
 		Optional<Menu> menu = menuService.findById(id);
-		
+		/*
 		if(menu.isPresent()) {  // 200번 ok
 			return ResponseEntity.ok().body(menu.get());
 		} else {	// 404처리
 			return ResponseEntity.notFound().build();
 		}
+		*/
+		// menu의 타입이 Optional<Menu>일 때 사용
+		return menu.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
 	}
+	
+	@PostMapping()
+	public ResponseEntity<?> insertMenu(@RequestBody Menu menu) {
+		Menu reMenu = menuService.insertMenu(menu);
+		return ResponseEntity.created(URI.create("/menu/" + reMenu.getId())).build();
+	}
+	
+	@PutMapping()
+	public ResponseEntity<?> updateMenu(@RequestBody Menu menu) {
+		Menu reMenu = menuService.insertMenu(menu);
+		return ResponseEntity.ok(reMenu);
+	}
+	
 }
 
 

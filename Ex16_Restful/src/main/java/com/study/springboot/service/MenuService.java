@@ -33,4 +33,12 @@ public class MenuService {
 		return menuRepository.findById(id);
 	}
 
+	public Menu insertMenu(Menu menu) {
+		return menuRepository.save(menu);
+	}
+
+	public Menu updateMenu(Menu menu) {
+		return menuRepository.save(menu);
+	}
+
 }
