@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/css/index.css" rel="stylesheet">
+<link href="/css/boardList.css" rel="stylesheet">
 <link href="/css/menu.css" rel="stylesheet">
 <script src="/webjars/jquery/3.7.1/jquery.min.js"></script>
 <!--
@@ -122,12 +123,35 @@
 		</script>
 		
 		<!-- 4. GET		/menu/10 : id가 10번인 메뉴1건만 조회-->
+		<div class="menu-test">
+			<h3>ID로 검색</h3>
+			<input name="id" id="id">&emsp;
+			<button type="button" id="idSelect" class="btn">조회</button><br><br>
+		</div>
+		<br>
+		<div id="id-result"></div>
+		<hr>
+		<script>
+			$(() => {
+				$('#idSelect').on('click', () => {
+					const value = $('#id').val();
+					$.ajax({
+						url : `/menu/${value}`,
+						method : 'GET',
+						success(result) {
+							console.log(result);
+						},
+						error: console.log
+					});
+				});
+			})
+		</script>
 		
 		
 		<script>
 			const menuTable = (selector, data) => {
 				const container = document.querySelector(selector);
-				let value = `<table align="center" class="list-area">
+				let value = `<table align="center" id="list-area">
 								<thead>
 									<tr>
 										<th>번호</th>
