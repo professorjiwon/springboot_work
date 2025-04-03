@@ -1,0 +1,10 @@
+@charset "UTF-8";
+.btn {
+	padding: 5px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100px;
+}
+.menu-test {
+	text-align: center;
+}

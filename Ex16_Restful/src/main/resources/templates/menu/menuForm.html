@@ -4,9 +4,82 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/css/index.css" rel="stylesheet">
+<link href="/css/menu.css" rel="stylesheet">
+<script src="/webjars/jquery/3.7.1/jquery.min.js"></script>
+<!--
+	GET		/menu : 전체메뉴 조회
+	GET		/menu/type/KR : 한식만 조회
+	GET		/menu/type/CH : 중식만 조회
+	GET		/menu/type/JP : 일식만 조회
+	GET		/menu/taste/MILD : 순한맛만 조회
+	GET		/menu/taste/HOT : 매운맛만 조회
+	GET		/menu/10 : id가 10번인 메뉴1건만 조회
+	
+	POST	/menu : 메뉴한건 등록
+	
+	PUT		/menu : 메뉴 한건 전체수정
+	PATCH	/menu : 메뉴 한건 일부수정
+	
+	DELETE	/menu/10 : 메뉴 한건만 삭제
+-->
 </head>
 <body>
 	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
-	<h2>MENU RESTful API</h2>
+	<h2 align="center">MENU RESTful API</h2>
+	
+	<div class="outer">
+		<!-- 1. GET		/menu : 전체메뉴 조회 -->
+		<div class="menu-test">
+			<h3>전체 메뉴</h3>
+			<button type="button" id="menuAllList" class="btn">조회</button>
+		</div>
+		<div id="menu-result"></div>
+		<hr>
+		<script>
+			$(() => {
+				$('#menuAllList').on('click', () => {
+					$.ajax({
+						url : '/menu',
+						method : 'GET',
+						success(result) {
+							console.log(result);
+							menuTable('#menu-result', result);
+						},
+						error : console.log
+					})
+				})
+			})
+		</script>
+		
+		<script>
+			const menuTable = (selector, data) => {
+				const container = document.querySelector(selector);
+				let value = `<table align="center" class="list-area">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>메뉴명</th>
+										<th>가격</th>
+										<th>레스토랑명</th>
+										<th>맛</th>
+										<th>종류</th>
+									</tr>
+								</thead>
+								<tbody>`;
+				data.forEach(item => {
+					value += `<tr>
+								<td>${item.id}</td>
+								<td>${item.name}</td>
+								<td>${item.price}</td>
+								<td>${item.restaurant}</td>
+								<td>${item.taste}</td>
+								<td>${item.type}</td>
+							  </tr>`;
+				});
+				value += `</tbody></table>`;
+				container.innerHTML = value;
+			}
+		</script>
+	</div>
 </body>
 </html>
