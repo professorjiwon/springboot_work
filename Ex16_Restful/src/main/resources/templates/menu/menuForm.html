@@ -31,7 +31,7 @@
 		<!-- 1. GET		/menu : 전체메뉴 조회 -->
 		<div class="menu-test">
 			<h3>전체 메뉴</h3>
-			<button type="button" id="menuAllList" class="btn">조회</button>
+			<button type="button" id="menuAllList" class="btn">조회</button><br><br>
 		</div>
 		<div id="menu-result"></div>
 		<hr>
@@ -46,6 +46,35 @@
 							menuTable('#menu-result', result);
 						},
 						error : console.log
+					})
+				})
+			})
+		</script>
+		
+		<!-- 2.  GET   /menu/type/KR, /menu/type/CH, /menu/type/JP  타입별 조회-->
+		<div class="menu-test">
+			<h3>메뉴 타입별 조회(GET)</h3>
+			<select id="typeSelector">
+				<option value="" disabled selected></option>
+				<option value="KR">한식</option>
+				<option value="CH">중식</option>
+				<option value="JP">일식</option>
+			</select>
+		</div>
+		<br>
+		<div id="menuType-result"></div>
+		<hr>
+		<script>
+			$(() => {
+				$('#typeSelector').on('click', e => {
+					console.log(e.target.value);
+					$.ajax({
+						url : `/menu/type/${e.target.value}`,
+						method : 'GET',
+						success(result) {
+							consol.log(result);
+						},
+						error:console.log
 					})
 				})
 			})
