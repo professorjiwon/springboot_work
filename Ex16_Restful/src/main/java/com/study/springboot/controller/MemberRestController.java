@@ -1,5 +1,7 @@
 package com.study.springboot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.springboot.domain.Member;
+import com.study.springboot.dto.ResponseDto;
 import com.study.springboot.dto.UserDto;
 import com.study.springboot.service.MemberRestService;
 
@@ -62,11 +65,42 @@ public class MemberRestController {
 	*/
 	
 	@PostMapping("/userdto")
-	public UserDto saveUserDto(@RequestBody UserDto userDto) {
+	public ResponseDto saveUserDto(@RequestBody UserDto userDto) {
 		Member m = memberRestService.saveUserDto(userDto);
 		
-		ResponseDto 
+		ResponseDto responseDto = new ResponseDto();
+		
+		if(m.getId() != null) {
+			responseDto.setMessage("ok-controller");
+			return responseDto;
+		} else {
+			responseDto.setMessage("fail-controller");
+			return responseDto;
+		}
 	}
+	
+	@GetMapping("/userdto")
+	public UserDto getUser(@RequestParam("id") String id) {
+		log.info("id : ", id);
+		return memberRestService.getUserById(id);
+	}
+	
+	@GetMapping("/userdto/{id}")
+	public UserDto getUserDto(@PathVariable("id") String id) {
+		log.info("id : ", id);
+		return memberRestService.getUserById(id);
+	}
+	
+	@GetMapping("/userall")
+	public List<Member> getUserAll() {
+		return memberRestService.getUserAll();
+	}
+	
+	@GetMapping("/userdtoall")
+	public List<UserDto> getUserDtoAll() {
+		return memberRestService.getUserDtoAll();
+	}
+	
 	
 	
 }
