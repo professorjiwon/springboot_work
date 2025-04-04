@@ -212,7 +212,7 @@
 				})
 			})
 		</script>
-		-->
+		
 		<!-- 6. PUT	 /menu : 메뉴 한건 전체수정 -->
 		<div class="menu-test">
 			<h3>메뉴 수정하기(PUT)</h3>
@@ -222,6 +222,8 @@
 				<button class="btn">검 색</button>
 			</form>
 			<br>
+			-------------------------------------------
+			<br><br>
 			<form name="menuUpdateFrm" id="menuUpdateFrm">
 				음식점 : <input name="restaurant" required><br><br>
 				메뉴 : <input name="name" required><br><br>
@@ -242,6 +244,7 @@
 			</form>
 			
 		</div>
+		<hr>
 		
 		<script>
 			$(() => {
@@ -275,6 +278,50 @@
 			})
 		</script>
 		
+		<!-- 7. DELETE	/menu/10 : 메뉴 한건만 삭제-->
+		<div class="menu-test">
+			<h3>메뉴 삭제(DELETE)</h3>
+			<p>메뉴번호로 삭제</p>
+			<form name="menuDeleteFrm" id="menuDeleteFrm">
+				메뉴번호 : <input name="id"><br><br>
+				<button class="btn">삭 제</button>
+			</form>
+		</div>
+		
+		<script>
+			$(() => {
+				$('#menuDeleteFrm').on('submit', e => {
+					e.preventDefault();
+					const id = e.target.id.value;
+					$.ajax({
+						url : `/menu/${id}`,
+						method : 'GET',
+						success(result) {
+							deleteMenu(id);
+						},
+						error(jqXHR) {
+							if(jqXHR.status == 404) {
+								alert("조회한 메뉴는 존재하지 않습니다.");
+							}
+						}
+					})
+				})
+				
+				const deleteMenu = id => {
+					$.ajax({
+						url : `/menu/${id}`,
+						method : 'DELETE',
+						success(result, textStatus, jqXHR) {
+							console.log(result);
+							if(jqXHR.status == 204) {
+								alert("삭제되었습니다");
+							}
+						},
+						error : console.log
+					})
+				}
+			})
+		</script>
 		
 		<script>
 			const findById = id => {
