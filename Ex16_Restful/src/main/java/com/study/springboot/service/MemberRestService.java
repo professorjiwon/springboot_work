@@ -1,7 +1,5 @@
 package com.study.springboot.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,25 +8,20 @@ import com.study.springboot.dto.UserDto;
 import com.study.springboot.repository.MemberRepository;
 
 @Service
-public class MemberService {
+public class MemberRestService {
 	
 	@Autowired
 	MemberRepository memberRepository;
-	
-	public boolean idCheck(String id) {
-		return memberRepository.existsById(id);
-	}
 
-	public Member insert(Member member) {
+	public Member saveUserDto(UserDto userDto) {
+		Member member = new Member();
+		member.setId(userDto.getId());
+		member.setName(userDto.getName());
+		member.setPassword("1234");
+		
 		return memberRepository.save(member);
 	}
+	
+	
 
-	public Member login(Member member) {
-		Optional<Member> loginUser = memberRepository.findById(member.getId());
-		if(loginUser.isPresent()) {
-			return loginUser.get();
-		} else {
-			return null;
-		}
-	}
 }
